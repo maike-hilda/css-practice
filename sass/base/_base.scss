@@ -1,0 +1,18 @@
+/* reset */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; /* border-box -> default is content box */
+}
+
+/* set root font size */
+html {
+    font-size: 62.6% /* with 16px default 10px i.e. 1rem = 10px */
+    /* better to use % in case user needs bigger font */
+}
+
+body {
+    box-sizing: border-box;
+}

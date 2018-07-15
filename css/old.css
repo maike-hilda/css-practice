@@ -1,0 +1,203 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* reset */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; /* border-box -> default is content box */
+}
+
+/* set root font size */
+html {
+    font-size: 62.6% /* with 16px default 10px i.e. 1rem = 10px */
+    /* better to use % in case user needs bigger font */
+}
+
+body {
+    /* inherited properties */
+    font-family: "Lato", sans-serif; /* this font is included in google fonts in html link */
+    font-weight: 400;
+    /* font-size: 16px; */
+    font-size: 1.6rem;
+    line-height: 1.7; /* 1.7 times bigger than predefined */
+    color: #777;
+    /* not inherited properties */
+    padding: 3rem;
+
+    box-sizing: border-box;
+}
+
+.header {
+    height: 95vh; /* at every point the height would be 95% of viewport height */
+    background-image: linear-gradient(
+        to right bottom, 
+        rgba(126, 213, 111, 0.8),  
+        #28b485
+        ), url(../img/hero.jpg);
+    background-size: cover; /* whatever the width of the viewport, try to fit element into it */
+    background-position: top;
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* 4 corners starting upper left in clw direction */
+    position: relative; /* for logo-box */
+}
+
+.header__logo-box {
+    position: absolute;
+    top: 4rem; /* counting from parent element, here header --> header needs position relative */
+    left: 4rem;
+}
+
+.header__logo {
+    height: 3.5rem;
+}
+
+.header__text-box {
+    position: absolute;
+    top: 40%; /* started with 50% */
+    /* these two get the top and left to be exactly in the center, use transform to shit the middle and center of the box there instead */
+    /* these are in realtion to the parent element */
+    left: 50%;
+    transform: translate(-50%, -50%); /* these % are in relation to the element itself */
+    text-align: center; /* for the button */
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 6rem;
+
+    backface-visibility: hidden; /* to get rid of slight upward movement after animation */
+}
+
+.heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400; /* 400 is considered normal */
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s; 
+    /* animation-delay: 2s;
+    animation-iteration-count: 3; */ 
+    animation-timing-function: ease-out;
+}
+
+.heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700; 
+    letter-spacing: 1.74rem;
+
+    animation: moveInRight 1s ease-out;
+
+}
+
+/* @keyframes rule */
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-10rem);
+    }
+
+    80% {
+        transform: translateX(1rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0); /* position as specified w/out keyframe */
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+
+    80% {
+        transform: translateX(-1rem) /* rotate(180deg) */;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0); /* position as specified w/out keyframe */
+    }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0); /* position as specified w/out keyframe */
+    }
+}
+
+
+
+/* pseudo class */
+.btn:link, 
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block; /* for padding/margins to count */
+    border-radius: 10rem;
+    transition: all .2s; /* determines for the transforms, makes more smooth */
+    position: relative; /* for ::after */
+}
+
+.btn:hover {
+    transform: translateY(-.3rem);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.2); /* x y direction and blur */
+}
+
+.btn:active {
+    transform: translateY(-.1rem);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+}
+
+.btn--white {
+    background-color: #fff;
+    color: #777;
+}
+
+/* pseudo element */
+.btn::after {
+    content: "";
+    display: inline-block; /* since button is inline-block */
+    height: 100%; /* inherits button height and width */
+    width: 100%; 
+    border-radius: 10rem;
+    position: absolute; /* references first elment with relative position it can find */
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s; /* for transform in btn:hover::after */
+}
+
+.btn--white::after {
+    background-color: #fff;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn--animated {
+    animation: moveInBottom .5s ease-out .75s; /* the last number means a delay */
+    animation-fill-mode: backwards; /* applies animation of 0% before animation starts */
+}

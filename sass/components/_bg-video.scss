@@ -1,0 +1,19 @@
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .15;
+    overflow: hidden; // clips off what overflows on the right from video
+
+    // fix that it fills up the entire area
+    &__content {
+        height: 100%;
+        width: 100%;
+        object-fit: cover; // similar to background-fit: cover
+        // video will fill entire parent wile maintainig its aspect ratio, rest gets clipped
+        // works with all html elements
+    }
+}

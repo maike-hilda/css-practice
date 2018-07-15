@@ -1,0 +1,33 @@
+.header {
+    height: 95vh; /* at every point the height would be 95% of viewport height */
+    background-image: linear-gradient(
+        to right bottom, 
+        rgba($color-primary-light, 0.8),  
+        rgba($color-primary-dark, 0.8)
+        ), url(../img/hero.jpg);
+    background-size: cover; /* whatever the width of the viewport, try to fit element into it */
+    background-position: top;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* 4 corners starting upper left in clw direction */
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* 4 corners starting upper left in clw direction */
+    position: relative; /* for logo-box */
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem; /* counting from parent element, here header --> header needs position relative */
+        left: 4rem;
+    }
+
+    &__logo {
+        height: 3.5rem;
+    }
+
+    &__text-box {
+        position: absolute;
+        top: 40%; /* started with 50% */
+        /* these two get the top and left to be exactly in the center, use transform to shit the middle and center of the box there instead */
+        /* these are in realtion to the parent element */
+        left: 50%;
+        transform: translate(-50%, -50%); /* these % are in relation to the element itself */
+        text-align: center; /* for the button */
+    }
+}
