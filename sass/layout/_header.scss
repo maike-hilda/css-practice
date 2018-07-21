@@ -7,9 +7,14 @@
         ), url(../img/hero.jpg);
     background-size: cover; /* whatever the width of the viewport, try to fit element into it */
     background-position: top;
+    position: relative; /* for logo-box */
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* 4 corners starting upper left in clw direction */
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* 4 corners starting upper left in clw direction */
-    position: relative; /* for logo-box */
+
+    @include respond(phone) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); /* 4 corners starting upper left in clw direction */
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); /* 4 corners starting upper left in clw direction */
+    }
 
     &__logo-box {
         position: absolute;
